@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+source "$(dirname "$0")/runtime.sh"
+cd "$appsort_root"
+if [ "$(uname -s)" != "Darwin" ]; then
+  printf '%s\n' 'Phone integration requires macOS. You can run the demo on this OS: python3 -m appsort --demo serve' >&2
+  exit 1
+fi
+if [ ! -x "$appsort_root/.venv/bin/python" ]; then
+  "$appsort_python" -m venv "$appsort_root/.venv"
+fi
+"$appsort_root/.venv/bin/python" -m pip install --disable-pip-version-check -r requirements.txt
+mkdir -p bin work/swift-module-cache
+if [ ! -x bin/appsort-usage-helper ]; then
+  /usr/bin/swiftc -module-cache-path work/swift-module-cache helper/screentime-copy.swift -O -o bin/appsort-usage-helper -lsqlite3
+fi
+printf '%s\n' 'Ready: run bin/appsort serve.' 'For usage records, enable Screen Time Share Across Devices and grant bin/appsort-usage-helper Full Disk Access.'

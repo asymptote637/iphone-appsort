@@ -1,0 +1,15 @@
+name: Feature request
+description: Explain the use case and the desired observable result.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem should this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired behavior
+      description: Include a concrete before/after example when useful.

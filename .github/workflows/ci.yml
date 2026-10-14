@@ -1,0 +1,36 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python: ['3.11', '3.12']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Unit and HTTP integration tests (simulated devices)
+        run: python -m unittest discover -s tests -v
+      - name: Python syntax
+        run: python -m compileall -q appsort
+      - name: Launcher syntax
+        run: bash -n bin/appsort bin/demo bin/setup bin/runtime.sh *.command
+      - name: Release contents check
+        run: python scripts/build_release.py --check-only
+      - name: Compile usage helper (macOS only)
+        if: runner.os == 'macOS'
+        run: |
+          mkdir -p work/swift-module-cache
+          swiftc -module-cache-path work/swift-module-cache helper/screentime-copy.swift -o /tmp/appsort-usage-helper -lsqlite3

@@ -1,0 +1,4 @@
+interface:
+  display_name: "AppSort：iPhone 使用频率排序"
+  short_description: "通过本地 Mac 工具按打开次数预览和整理 iPhone 主屏幕"
+  default_prompt: "使用 $iphone-appsort 读取我的 iPhone 使用频率并生成主屏幕排序预览。"

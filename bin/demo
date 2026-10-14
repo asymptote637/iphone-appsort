@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+source "$(dirname "$0")/runtime.sh"
+cd "$appsort_root"
+exec "$appsort_python" -m appsort --demo serve --port 8767 "$@"

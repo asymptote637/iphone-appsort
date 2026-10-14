@@ -1,0 +1,16 @@
+.venv/
+state/
+demo-state/
+work/
+dist/
+__pycache__/
+*.py[cod]
+*.egg-info/
+bin/appsort-usage-helper
+.DS_Store
+.env
+.env.*
+*.log
+*.local
+*.plist
+*.command.backup

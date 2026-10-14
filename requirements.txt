@@ -1,0 +1,2 @@
+pymobiledevice3==11.29.1
+ccl_segb @ https://github.com/cclgroupltd/ccl-segb/archive/23c3f7d3d969a79627b738ba0a2486c31d675753.zip

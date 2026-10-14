@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Questions and compatibility discussion
+    url: https://github.com/asymptote637/iphone-appsort/discussions
+    about: Ask before trying an unverified device-write method.
